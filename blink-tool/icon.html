@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>眨眼跳跃 — 图标预览</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 16px 48px;
+    background: #0b0e1a; color: #eef2ff;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    text-align: center;
+  }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  .hint { color: #9aa6d8; font-size: 13px; margin: 0 0 28px; }
+  .main-icon { width: 256px; height: 256px; border-radius: 56px; box-shadow: 0 16px 48px rgba(0,0,0,.5); }
+  .grid { display: flex; gap: 22px; justify-content: center; align-items: flex-end; flex-wrap: wrap; margin-top: 40px; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #9aa6d8; font-size: 12px; }
+  .cell img { display: block; border-radius: 22%; background: #141a30; }
+  .sq { border-radius: 0 !important; }
+</style>
+</head>
+<body>
+  <h1>「眨眼跳跃」应用图标预览</h1>
+  <p class="hint">1024×1024 · 深靛蓝底 + 白色眼睛轮廓 + 青色瞳孔小球 · 单一核心符号 · 高对比度</p>
+
+  <!-- 主视觉：眼睛 = 眨眼控制，瞳孔位置的青色小球 = 跳跃的小球，底部两根小柱 = 躲柱子 -->
+  <svg class="main-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-label="眨眼跳跃图标">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#1d2748"/>
+        <stop offset="1" stop-color="#0c1024"/>
+      </linearGradient>
+      <radialGradient id="glow" cx="0.5" cy="0.42" r="0.55">
+        <stop offset="0" stop-color="#5be0ff" stop-opacity="0.22"/>
+        <stop offset="1" stop-color="#5be0ff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+    <rect width="1024" height="1024" rx="224" fill="url(#glow)"/>
+
+    <!-- pillars (kept tiny so the eye reads at small sizes) -->
+    <rect x="382" y="616" width="46" height="70" rx="10" fill="#4ecdc4"/>
+    <rect x="596" y="580" width="46" height="106" rx="10" fill="#ff6b8a"/>
+
+    <!-- eye almond -->
+    <path d="M 250 520 Q 512 286 774 520 Q 512 754 250 520 Z"
+          fill="none" stroke="#ffffff" stroke-width="38"
+          stroke-linejoin="round"/>
+
+    <!-- pupil = the jumping ball -->
+    <circle cx="512" cy="512" r="74" fill="#ffffff"/>
+    <circle cx="512" cy="512" r="74" fill="none" stroke="#5be0ff" stroke-width="16"/>
+    <circle cx="486" cy="486" r="20" fill="#20263f"/>
+    <circle cx="538" cy="486" r="20" fill="#20263f"/>
+  </svg>
+
+  <!-- size readability check -->
+  <div class="grid" id="grid"></div>
+
+  <script>
+    // Preview-only helper: render the same icon at several sizes.
+    var svg = document.querySelector('.main-icon');
+    var markup = svg.outerHTML;
+    var sizes = [120, 80, 56, 40];
+    var grid = document.getElementById('grid');
+    sizes.forEach(function (s) {
+      var cell = document.createElement('div');
+      cell.className = 'cell';
+      var holder = document.createElement('div');
+      holder.innerHTML = markup
+        .replace('class="main-icon"', 'width="' + s + '" height="' + s + '" style="border-radius:' + (s * 0.22) + 'px"');
+      cell.appendChild(holder.firstChild);
+      var label = document.createElement('span');
+      label.textContent = s + 'px';
+      cell.appendChild(label);
+      grid.appendChild(cell);
+    });
+  </script>
+</body>
+</html>

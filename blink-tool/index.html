@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script src="https://connect.tiktok-minis.com/minis/sdk.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#0e1326">
+  <title>眨眼跳跃</title>
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body>
+  <!-- Game world -->
+  <canvas id="stage" aria-label="游戏画面"></canvas>
+
+  <!-- HUD -->
+  <div class="hud" id="hud">
+    <div class="hud-score" id="hud-score">0</div>
+    <div class="hud-best">最高 <span id="hud-best">0</span></div>
+  </div>
+
+  <!-- Camera preview + eye alignment (shown only in camera mode) -->
+  <div class="cam" id="cam-box" hidden>
+    <canvas id="cam" width="96" height="128"></canvas>
+    <div class="cam-eyes">
+      <span class="eye-chip" id="chip-l">L</span>
+      <span class="eye-chip" id="chip-r">R</span>
+    </div>
+    <p class="cam-hint" id="cam-hint">把眼睛对准方框</p>
+  </div>
+
+  <!-- Ready panel -->
+  <section class="panel" id="panel-ready">
+    <h1 class="title">眨眼跳跃</h1>
+    <p class="subtitle">小球向前跑，眨眼跳过柱子</p>
+    <button class="btn btn-primary" id="btn-camera" type="button">开启摄像头 · 眨眼玩</button>
+    <p class="tip" id="tip-touch">或直接点击屏幕开始</p>
+    <p class="tip tip-eyes" id="tip-eyes" hidden>眨左眼 = 小跳　眨右眼 = 大跳<br>也可以点击屏幕跳跃</p>
+    <p class="tip tip-error" id="tip-error" hidden></p>
+  </section>
+
+  <!-- Game over panel -->
+  <section class="panel panel-over" id="panel-over" hidden>
+    <h2 class="title title-sm">游戏结束</h2>
+    <p class="subtitle">得分 <span id="over-score">0</span>　最高 <span id="over-best">0</span></p>
+    <p class="tip" id="over-restart">点击屏幕重新开始</p>
+  </section>
+
+  <!-- Hidden video source for camera analysis -->
+  <video id="video" class="video-hidden" muted playsinline autoplay></video>
+
+  <script src="./js/platform.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
