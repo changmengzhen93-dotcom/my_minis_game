@@ -1,0 +1,6 @@
+{
+    "app_name": "lazy-fat-loss",
+    "app_description": "懒人减脂小工具：记录饮食热量、自动分类早午晚餐、拍照估算热量",
+    "capabilities": [],
+    "datasources": {}
+}
